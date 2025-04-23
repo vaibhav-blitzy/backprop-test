@@ -20,3 +20,5 @@ app.get('/evening', (req, res) => {
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
+
+console.log('For out-of-sync tech spec);
