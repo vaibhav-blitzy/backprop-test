@@ -1,14 +1,32 @@
-const http = require('http');
+const express = require('express');
 
 const hostname = '127.0.0.1';
 const port = 3000;
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello, World!\n');
+const app = express();
+
+// Existing endpoint - responds with Hello World
+// Supports optional ?name= query parameter for personalized greeting
+app.get('/', (req, res) => {
+  const name = req.query.name;
+  if (name) {
+    res.send(`Hello, ${name}!`);
+  } else {
+    res.send('Hello, World!');
+  }
 });
 
-server.listen(port, hostname, () => {
+// New endpoint - responds with Good Evening
+// Supports optional ?name= query parameter for personalized greeting
+app.get('/evening', (req, res) => {
+  const name = req.query.name;
+  if (name) {
+    res.send(`Good Evening, ${name}!`);
+  } else {
+    res.send('Good Evening');
+  }
+});
+
+app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
